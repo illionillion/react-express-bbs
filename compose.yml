@@ -1,0 +1,33 @@
+services:
+  app:
+    container_name: app
+    image: node:lts-alpine
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    command: sh -c "npm run dev"
+    tty: true
+    ports:
+      - ${REACT_PORT}:5173
+  api:
+    container_name: api
+    image: node:lts-alpine
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    command: sh -c "npm run dev"
+    ports:
+      - ${EXPRESS_PORT}:3000
+  db:
+    container_name: db
+    image: mysql:latest
+    restart: always
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
