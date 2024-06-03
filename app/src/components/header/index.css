@@ -1,0 +1,39 @@
+header {
+  background-color: rgb(247, 183, 7);
+}
+
+.header__inner {
+  max-width: 1080px;
+  width: 100%;
+  min-width: 380px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__inner h1 {
+  color: #fff;
+  text-shadow: 1px 2px 3px #808080;
+  padding-left: 1rem;
+}
+
+.header__nav {
+  padding-right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__nav ul {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
