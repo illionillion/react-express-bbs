@@ -31,3 +31,14 @@ main {
 .userForm label[for="content"] {
   display: block;
 }
+
+.timeline__inner {
+  max-width: 1080px;
+  width: 100%;
+  min-width: 380px;
+  margin: auto;
+}
+
+.timeline__list {
+  padding-inline: 1rem;
+}

@@ -61,12 +61,14 @@ function App() {
         </div>
         <div className="timeline">
           <div className="timeline__inner">
-            {posts.map(post => (
-              <div>
-                <p>ユーザー名：{post.userName}</p>
-                <p>内容：{post.content}</p>
-              </div>
-            ))}
+            <div className="timeline__list">
+              {posts.map(post => (
+                <div className="timeline__item">
+                  <p>ユーザー名：{post.userName}</p>
+                  <p>内容：{post.content}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </main>
