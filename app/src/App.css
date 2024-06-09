@@ -13,12 +13,12 @@ body {
 main {
   background-color: aliceblue;
   flex-grow: 1;
+  padding-block: 1rem;
 }
 
 .main__inner {
   max-width: 1080px;
   width: 100%;
-  min-width: 380px;
   margin: auto;
 }
 
@@ -26,19 +26,37 @@ main {
   display: flex;
   flex-direction: column;
   padding-inline: 1rem;
+  gap: 1rem;
 }
 
-.userForm label[for="content"] {
+.userForm label {
   display: block;
+  width: 100%;
 }
 
-.timeline__inner {
+.userForm input, .userForm textarea {
+  width: 100%;
+  }
+  
+.userForm textarea {
+  resize: vertical;
+  min-height: 50px;
+}
+
+.form-control:has(button) {
+  text-align: right;
+}
+
+.timeline {
   max-width: 1080px;
   width: 100%;
-  min-width: 380px;
   margin: auto;
 }
 
-.timeline__list {
+.timeline__inner {
   padding-inline: 1rem;
+}
+
+.timeline__inner h3 {
+  margin: 0;
 }

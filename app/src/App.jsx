@@ -1,6 +1,7 @@
-import { useState } from "react";
 import "./App.css";
+import { useState } from "react";
 import { Header } from "./components/header";
+import { TimelineItem } from "./components/timeline-item";
 
 function App() {
   const [userName, setUserName] = useState("");
@@ -26,7 +27,7 @@ function App() {
             }}
           >
             <div className="form-control">
-              <label htmlFor="userName">ユーザー名：</label>
+              <label htmlFor="userName">ユーザー名</label>
               <input
                 type="text"
                 value={userName}
@@ -36,7 +37,7 @@ function App() {
               />
             </div>
             <div className="form-control">
-              <label htmlFor="userEmail">メールアドレス：</label>
+              <label htmlFor="userEmail">メールアドレス</label>
               <input
                 type="email"
                 value={userEmail}
@@ -46,7 +47,7 @@ function App() {
               />
             </div>
             <div className="form-control">
-              <label htmlFor="content">内容：</label>
+              <label htmlFor="content">内容</label>
               <textarea
                 id="content"
                 value={content}
@@ -61,12 +62,10 @@ function App() {
         </div>
         <div className="timeline">
           <div className="timeline__inner">
+            <h3>投稿一覧</h3>
             <div className="timeline__list">
-              {posts.map(post => (
-                <div className="timeline__item">
-                  <p>ユーザー名：{post.userName}</p>
-                  <p>内容：{post.content}</p>
-                </div>
+              {posts.length === 0 ? <p>投稿がりません</p> : posts.map((post, index) => (
+                <TimelineItem userName={post.userName} content={post.content} key={index} />
               ))}
             </div>
           </div>
