@@ -9,6 +9,8 @@ services:
     tty: true
     ports:
       - ${REACT_PORT}:5173
+    environment:
+      - VITE_PROXY_URL=${PROXY_URL}
   api:
     container_name: api
     image: node:lts-alpine
