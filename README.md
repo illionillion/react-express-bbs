@@ -17,9 +17,10 @@ PROXY_URL=http://localhost:8080
 
 ```bash
 docker compose run --rm app npm i
+docker compose run --rm api npm i
 ```
 
-3. コンテナの起動
+1. コンテナの起動
 
 ```bash
 docker compose up -d

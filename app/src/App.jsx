@@ -23,10 +23,7 @@ function App() {
         },
         body: JSON.stringify({
           userName,
-          userName,
           userEmail,
-          userEmail,
-          content,
           content,
         }),
       });
