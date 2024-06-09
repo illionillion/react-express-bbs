@@ -25,6 +25,7 @@ services:
       - DB_USER=${MYSQL_USER}
       - DB_PASSWORD=${MYSQL_PASSWORD}
       - DB_DATABASE=${MYSQL_DATABASE}
+      - CORS_URL=${CORS_URL}
     depends_on:
       - db
   db:

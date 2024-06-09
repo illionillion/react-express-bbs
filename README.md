@@ -9,6 +9,7 @@ MYSQL_PASSWORD=password
 MYSQL_DATABASE=my_db
 EXPRESS_PORT=8080
 REACT_PORT=3000
+CORS_URL=http://localhost:3000
 ```
 
 2. 必要なライブラリをインストール
