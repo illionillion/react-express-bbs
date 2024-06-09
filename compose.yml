@@ -16,8 +16,17 @@ services:
     volumes:
       - ./api:/app
     command: sh -c "npm run dev"
+    tty: true
     ports:
       - ${EXPRESS_PORT}:3000
+    environment:
+      - DB_HOST=db
+      - DB_PORT=${MYSQL_PORT}
+      - DB_USER=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_DATABASE=${MYSQL_DATABASE}
+    depends_on:
+      - db
   db:
     container_name: db
     image: mysql:latest
