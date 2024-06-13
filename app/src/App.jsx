@@ -16,17 +16,20 @@ function App() {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_PROXY_URL}/api/post`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userName,
-          userEmail,
-          content,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_PROXY_URL}/api/post`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userName,
+            userEmail,
+            content,
+          }),
+        }
+      );
 
       if (response.ok) {
         setPosts([...posts, { userName, userEmail, content }]);
@@ -44,7 +47,9 @@ function App() {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_PROXY_URL}/api/post`);
+      const response = await fetch(
+        `${import.meta.env.VITE_PROXY_URL}/api/post`
+      );
       if (response.ok) {
         const { posts } = await response.json();
         setPosts(posts);
@@ -98,22 +103,22 @@ function App() {
               <button type="submit">投稿</button>
             </div>
           </form>
-        </div>
-        <div className="timeline">
-          <div className="timeline__inner">
-            <h3>投稿一覧</h3>
-            <div className="timeline__list">
-              {posts.length === 0 ? (
-                <p>投稿がりません</p>
-              ) : (
-                posts.map((post, index) => (
-                  <TimelineItem
-                    userName={post.userName}
-                    content={post.content}
-                    key={index}
-                  />
-                ))
-              )}
+          <div className="timeline">
+            <div className="timeline__inner">
+              <h3>投稿一覧</h3>
+              <div className="timeline__list">
+                {posts.length === 0 ? (
+                  <p>投稿がりません</p>
+                ) : (
+                  posts.map((post, index) => (
+                    <TimelineItem
+                      userName={post.userName}
+                      content={post.content}
+                      key={index}
+                    />
+                  ))
+                )}
+              </div>
             </div>
           </div>
         </div>
