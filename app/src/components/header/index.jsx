@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './index.css'
 
 export const Header = () => {
@@ -6,8 +7,8 @@ export const Header = () => {
       <h1>掲示板</h1>
       <nav className='header__nav'>
         <ul>
-          <li><a href="#">ホーム</a></li>
-          <li><a href="#">マイページ</a></li>
+          <li><Link to="/">ホーム</Link></li>
+          <li><Link to="/my-page">マイページ</Link></li>
         </ul>
       </nav>
     </div>
