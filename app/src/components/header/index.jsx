@@ -4,7 +4,7 @@ import './index.css'
 export const Header = () => {
     return <header>
     <div className="header__inner">
-      <h1>掲示板</h1>
+      <h1><Link to="/">掲示板</Link></h1>
       <nav className='header__nav'>
         <ul>
           <li><Link to="/">ホーム</Link></li>
