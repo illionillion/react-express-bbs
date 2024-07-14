@@ -12,13 +12,13 @@ router.get('/api/post', async (req, res, next) => {
   let connection = await mysqlConnection()
   try {
     const query =
-      "select post_id, user_name, user_email, content, posted_at from posts";
+      "select p.post_id, u.user_id, u.user_name, p.content, p.posted_at from posts p join users u on p.user_id = u.user_id";
     // SQL実行
     const [result] = await connection.execute(query);
     const posts = result.map(post => ({
       postId: post.post_id,
+      userId: post.user_id,
       userName: post.user_name,
-      userEmail: post.user_email,
       content: post.content,
       postedAt: post.posted_at
     }))
@@ -33,8 +33,8 @@ router.get('/api/post', async (req, res, next) => {
 
 // create post
 router.post('/api/post', async (req, res, next) => {
-  const {userName, userEmail, content} = req.body
-  if (!userName || !userEmail || !content) {
+  const {userId, content} = req.body
+  if (!userId || !content) {
     res.status(400).json({message: "データが不足しています"})
     return
   }
@@ -43,9 +43,9 @@ router.post('/api/post', async (req, res, next) => {
 
   try {
     const query =
-      "insert into posts (user_name, user_email, content) values (?, ?, ?)";
+      "insert into posts (user_id, content) values (?, ?, ?)";
     // SQL実行
-    await connection.execute(query, [userName, userEmail, content]);
+    await connection.execute(query, [userId, content]);
     res.status(200).json({message: "success"})
   } catch (error) {
       console.error('/api/post Error:', error);
