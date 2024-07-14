@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TimelineItem } from "../../src/components/timeline-item";
+import { TimelineItem } from "../../components/timeline-item";
 import "./index.css";
 
 export const Home = () => {

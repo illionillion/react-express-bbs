@@ -1,0 +1,28 @@
+.login h3 {
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+  max-width: 500px;
+  background-color: white;
+  margin: auto;
+  border-radius: 25px;
+  box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.4);
+}
+
+.loginForm label {
+  display: block;
+  width: 100%;
+}
+
+.loginForm input {
+  width: 100%;
+}
+
+.form-control:has(button) {
+  text-align: center;
+}
