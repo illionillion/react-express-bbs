@@ -43,7 +43,7 @@ router.post("/api/post", async (req, res, next) => {
   let connection = await mysqlConnection();
 
   try {
-    const query = "insert into posts (user_id, content) values (?, ?, ?)";
+    const query = "insert into posts (user_id, content) values (?, ?)";
     // SQL実行
     await connection.execute(query, [userId, content]);
     res.status(200).json({ message: "success" });
