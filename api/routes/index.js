@@ -1,6 +1,6 @@
 var express = require("express");
 const mysqlConnection = require("../lib/db");
-const { comparePassword } = require("../lib/password");
+const { comparePassword, hashPassword } = require("../lib/password");
 var router = express.Router();
 
 /* GET home page. */
@@ -80,7 +80,46 @@ router.post("/api/login", async (req, res, next) => {
       res.status(404).json({ message: "user not found" });
     }
   } catch (error) {
-    console.error("/api/post Error:", error);
+    console.error("/api/login Error:", error);
+    res.status(500).json({ message: "server error" });
+  } finally {
+    if (connection) connection.destroy();
+  }
+});
+
+router.post("/api/register", async (req, res, next) => {
+  const { userName, userEmail, password } = req.body;
+  if (!userName || !userEmail || !password) {
+    res.status(400).json({ message: "データが不足しています" });
+    return;
+  }
+
+  let connection = await mysqlConnection();
+
+  try {
+    const [existUsers] = await connection.execute("select user_id, user_name, user_email, password from users where user_name = ? or user_email = ?", [userName, userEmail]);
+    if (existUsers.length > 0) {
+      res.status(400).json({message: "the same user name or email exists"})
+      return
+    }
+
+    const query =
+      'INSERT INTO users (user_name, user_email, password) VALUES (?, ?, ?)';
+    const [result] = await connection.execute(query, [
+      userName,
+      userEmail,
+      hashPassword(password),
+    ]);
+
+    const userId = result.insertId;
+
+    res.status(201).json({
+      message: "created user",
+      userId: userId
+    })
+    
+  } catch (error) {
+    console.error("/api/register Error:", error);
     res.status(500).json({ message: "server error" });
   } finally {
     if (connection) connection.destroy();
