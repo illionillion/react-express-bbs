@@ -72,7 +72,7 @@ router.post("/api/login", async (req, res, next) => {
       const user = result[0];
       const passwordMatch = comparePassword(password, user.password);
       if (passwordMatch) {
-        res.status(200).json({ message: "success login", userId: user.user_id }); // userIdとトークンを一緒に返す。
+        res.status(200).json({ message: "success login", userId: user.user_id, userName: userName }); // userIdとトークンを一緒に返す。
       } else {
         res.status(401).json({ message: "password is incorrect" });
       }
@@ -115,7 +115,8 @@ router.post("/api/register", async (req, res, next) => {
 
     res.status(201).json({
       message: "created user",
-      userId: userId
+      userId: userId,
+      userName: userName
     })
     
   } catch (error) {
