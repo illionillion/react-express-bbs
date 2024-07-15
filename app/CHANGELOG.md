@@ -1,5 +1,11 @@
 # app
 
+## 2.0.0
+
+### Major Changes
+
+- [#3](https://github.com/illionillion/react-express-bbs/pull/3) [`6710d66`](https://github.com/illionillion/react-express-bbs/commit/6710d6658cbb16889cf4602a19c715f9722bd794) Thanks [@illionillion](https://github.com/illionillion)! - Add Login and Register and MyPage
+
 ## 1.0.0
 
 ### Major Changes
