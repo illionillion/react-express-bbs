@@ -1,5 +1,15 @@
 # api
 
+## 2.0.0
+
+### Major Changes
+
+- [#3](https://github.com/illionillion/react-express-bbs/pull/3) [`3ec003b`](https://github.com/illionillion/react-express-bbs/commit/3ec003b9dea5594fb0e8068fd28cbf62c716d1b1) Thanks [@illionillion](https://github.com/illionillion)! - Add user login and register api
+
+### Minor Changes
+
+- [#3](https://github.com/illionillion/react-express-bbs/pull/3) [`6710d66`](https://github.com/illionillion/react-express-bbs/commit/6710d6658cbb16889cf4602a19c715f9722bd794) Thanks [@illionillion](https://github.com/illionillion)! - changes response
+
 ## 1.0.1
 
 ### Patch Changes
