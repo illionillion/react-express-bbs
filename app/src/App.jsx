@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
 import { AuthContext, useAuthContext } from "./contexts/auth-context";
 import { Login } from "./routes/Login";
+import { Register } from "./routes/Register";
 
 function App() {
   const ctx = useAuthContext(AuthContext);
@@ -34,7 +35,7 @@ function App() {
                 />
                 <Route
                   path="/register"
-                  element={isLogin ? <Navigate to="/" /> : <h1>登録</h1>}
+                  element={isLogin ? <Navigate to="/" /> : <Register />}
                 />
                 <Route path="*" element={<h1>Not Found Page</h1>} />
               </Routes>
