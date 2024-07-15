@@ -5,6 +5,7 @@ import { Header } from "./components/header";
 import { AuthContext, useAuthContext } from "./contexts/auth-context";
 import { Login } from "./routes/Login";
 import { Register } from "./routes/Register";
+import { MyPage } from "./routes/MyPage";
 
 function App() {
   const ctx = useAuthContext(AuthContext);
@@ -26,7 +27,7 @@ function App() {
                 <Route
                   path="/my-page"
                   element={
-                    isLogin ? <h1>マイページ</h1> : <Navigate to="/login" />
+                    isLogin ? <MyPage /> : <Navigate to="/login" />
                   }
                 />
                 <Route
