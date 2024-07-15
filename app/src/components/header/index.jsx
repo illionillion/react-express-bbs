@@ -8,7 +8,8 @@ export const Header = () => {
 
   const isLogin = !!userData.userId || !!userData.userName;
 
-  const handleLogout = async () => {
+  const handleLogout = (e) => {
+    e.preventDefault()
     onSignout()
   }
 
@@ -28,7 +29,7 @@ export const Header = () => {
                 <Link to="/my-page">マイページ</Link>
               </li>
               <li>
-                <button onClick={handleLogout}>ログアウト</button>
+                <a onClick={handleLogout}>ログアウト</a>
               </li>
             </ul>
           ) : undefined}

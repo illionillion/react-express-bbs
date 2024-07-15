@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TimelineItem } from "../../components/timeline-item";
 import "./index.css";
+import { AuthContext } from "../../contexts/auth-context";
 
 export const Home = () => {
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
+  const { userData } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!userName || !userEmail || !content) {
+    if (!content) {
       return;
     }
 
@@ -23,17 +23,14 @@ export const Home = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            userName,
-            userEmail,
+            userId: userData.userId,
             content,
           }),
         }
       );
 
       if (response.ok) {
-        setPosts([...posts, { userName, userEmail, content }]);
-        setUserName("");
-        setUserEmail("");
+        setPosts([...posts, { userId: userData.userId, userName: userData.userName, content }]);
         setContent("");
         console.log("成功");
       } else {
@@ -66,26 +63,6 @@ export const Home = () => {
   return (
     <>
       <form className="userForm" onSubmit={handleSubmit}>
-        <div className="form-control">
-          <label htmlFor="userName">ユーザー名</label>
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.currentTarget.value)}
-            id="userName"
-            placeholder="ユーザー名を入力"
-          />
-        </div>
-        <div className="form-control">
-          <label htmlFor="userEmail">メールアドレス</label>
-          <input
-            type="email"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.currentTarget.value)}
-            id="userEmail"
-            placeholder="メールアドレスを入力"
-          />
-        </div>
         <div className="form-control">
           <label htmlFor="content">内容</label>
           <textarea

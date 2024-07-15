@@ -23,6 +23,6 @@
   width: 100%;
 }
 
-.form-control:has(button) {
+.loginForm .form-control:has(button) {
   text-align: center;
 }

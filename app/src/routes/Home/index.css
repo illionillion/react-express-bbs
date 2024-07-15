@@ -20,7 +20,7 @@
   min-height: 50px;
 }
 
-.form-control:has(button) {
+.userForm .form-control:has(button) {
   text-align: right;
 }
 
