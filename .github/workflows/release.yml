@@ -27,7 +27,8 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
 
-            - run: npm ci
+            # - run: npm ci
+            - run: npm install
 
             - name: Create Release Pull Request or Publish to npm
               id: changesets
