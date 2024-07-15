@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import "./index.css";
-import { AuthContext, useAuthContext } from "../../contexts/auth-context";
+import { AuthContext } from "../../contexts/auth-context";
+import { useContext } from "react";
 
 export const Header = () => {
-  const { userData } = useAuthContext(AuthContext);
+  const { userData, onSignout } = useContext(AuthContext);
 
   const isLogin = !!userData.userId || !!userData.userName;
+
+  const handleLogout = async () => {
+    onSignout()
+  }
 
   return (
     <header>
@@ -21,6 +26,9 @@ export const Header = () => {
               </li>
               <li>
                 <Link to="/my-page">マイページ</Link>
+              </li>
+              <li>
+                <button onClick={handleLogout}>ログアウト</button>
               </li>
             </ul>
           ) : undefined}

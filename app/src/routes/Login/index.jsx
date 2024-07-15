@@ -1,12 +1,12 @@
 import "./index.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext, useAuthContext } from "../../contexts/auth-context";
+import { AuthContext } from "../../contexts/auth-context";
 
 export const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const { onSignin } = useAuthContext(AuthContext);
+  const { onSignin } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

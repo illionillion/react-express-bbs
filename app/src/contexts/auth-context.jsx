@@ -18,11 +18,10 @@ export const AuthContext = createContext(defaultContext);
 export const useAuthContext = () => {
   const [value, setValue] = useState(getLocalStorage());
   const onSignin = (user) => {
-    console.log(user);
     setValue(user);
     setLocalStorage(user);
   };
-  const onSignout = async () => {
+  const onSignout = () => {
     // ユーザーの情報を削除
     setValue({
       userId: undefined,
@@ -63,9 +62,4 @@ const setLocalStorage = (user) => {
   } catch (error) {
     console.error(error);
   }
-};
-
-export const AuthProvider = ({ children }) => {
-  const ctx = useAuthContext(AuthContext);
-  return <AuthContext.Provider value={ctx}>{children}</AuthContext.Provider>;
 };

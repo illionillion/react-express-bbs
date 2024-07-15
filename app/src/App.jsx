@@ -2,16 +2,16 @@ import { Home } from "./routes/Home";
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header";
-import { AuthContext, AuthProvider, useAuthContext } from "./contexts/auth-context";
+import { AuthContext, useAuthContext } from "./contexts/auth-context";
 import { Login } from "./routes/Login";
 
 function App() {
-  const { userData } = useAuthContext(AuthContext);
-  console.log(userData);
+  const ctx = useAuthContext(AuthContext);
+  const { userData } = ctx
   const isLogin = !!userData.userId || !!userData.userName;
 
   return (
-    <AuthProvider>
+    <AuthContext.Provider value={ctx}>
       <BrowserRouter>
         <div className="App">
           <Header />
@@ -42,7 +42,7 @@ function App() {
           </main>
         </div>
       </BrowserRouter>
-    </AuthProvider>
+      </AuthContext.Provider>
   );
 }
 
