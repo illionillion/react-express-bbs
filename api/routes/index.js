@@ -127,4 +127,36 @@ router.post("/api/register", async (req, res, next) => {
   }
 });
 
+router.get("/api/users/:userId", async (req, res, next) => {
+  const userId = req.params.userId
+
+  if (!userId) {
+    res.status(400).json({message: "empty param"})
+    return
+  }
+
+  let connection = await mysqlConnection();
+  try {
+    const query =
+      "select user_id, user_name, user_email from users where user_id = ?";
+    // SQL実行
+    const [result] = await connection.execute(query, [userId]);
+
+    if (result.length === 0) {
+      
+      res.status(404).json({ message: "user not found" });
+      return
+    }
+
+    const user = result[0]
+    
+    res.status(200).json({ user: user });
+  } catch (error) {
+    console.error(`/api/user/${userId} Error:`, error);
+    res.status(500).json({ message: "server error" });
+  } finally {
+    if (connection) connection.destroy();
+  }
+});
+
 module.exports = router;
