@@ -1,5 +1,11 @@
 # api
 
+## 3.0.0
+
+### Major Changes
+
+- [#6](https://github.com/illionillion/react-express-bbs/pull/6) [`e4079bd`](https://github.com/illionillion/react-express-bbs/commit/e4079bda8b792ad278550ee553c12e6d9667848a) Thanks [@illionillion](https://github.com/illionillion)! - ユーザー情報取得の API 作成 [#5](https://github.com/illionillion/react-express-bbs/issues/5)
+
 ## 2.0.0
 
 ### Major Changes
