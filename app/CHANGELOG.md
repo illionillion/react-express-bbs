@@ -1,5 +1,11 @@
 # app
 
+## 2.1.0
+
+### Minor Changes
+
+- [#8](https://github.com/illionillion/react-express-bbs/pull/8) [`106ed0e`](https://github.com/illionillion/react-express-bbs/commit/106ed0e8f6901467218b957f0e515deed008cbf9) Thanks [@illionillion](https://github.com/illionillion)! - 投稿を改行できるようにした
+
 ## 2.0.0
 
 ### Major Changes
