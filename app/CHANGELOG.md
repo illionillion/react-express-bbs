@@ -1,5 +1,11 @@
 # app
 
+## 2.2.0
+
+### Minor Changes
+
+- [`512d51f`](https://github.com/illionillion/react-express-bbs/commit/512d51f1edc090d8fa36a4fc12188faf14f7b5f7) Thanks [@illionillion](https://github.com/illionillion)! - `react-query`でデータフェッチや送信するように変更
+
 ## 2.1.0
 
 ### Minor Changes
