@@ -1,20 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { TimelineItem } from "../../components/timeline-item";
 import "./index.css";
 import { AuthContext } from "../../contexts/auth-context";
 
 export const Home = () => {
   const [content, setContent] = useState("");
-  const [posts, setPosts] = useState([]);
   const { userData } = useContext(AuthContext);
+  const queryClient = useQueryClient();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!content) {
-      return;
-    }
-
-    try {
+  // 投稿の送信（useMutation）
+  const mutation = useMutation({
+    mutationFn: async (content) => {
       const response = await fetch(
         `${import.meta.env.VITE_PROXY_URL}/api/post`,
         {
@@ -28,37 +25,42 @@ export const Home = () => {
           }),
         }
       );
+      if (!response.ok) throw new Error("投稿失敗");
+      return await response.json();
+    },
+    onSuccess: () => {
+      // 投稿後にキャッシュを更新（再取得）
+      queryClient.invalidateQueries(["posts"]);
+    },
+  });
 
-      if (response.ok) {
-        setPosts([...posts, { userId: userData.userId, userName: userData.userName, content }]);
-        setContent("");
-        console.log("成功");
-      } else {
-        console.log("失敗");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchPosts = async () => {
-    try {
+  // 投稿を取得するためのuseQuery
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: async () => {
       const response = await fetch(
         `${import.meta.env.VITE_PROXY_URL}/api/post`
       );
-      if (response.ok) {
-        const { posts } = await response.json();
-        setPosts(posts);
-        return;
-      }
-    } catch (error) {
-      console.error(error);
-    }
+      if (!response.ok) throw new Error("データ取得失敗");
+      const { posts } = await response.json();
+      return posts;
+    },
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!content) return;
+
+    // 投稿送信
+    mutation.mutate(content);
+    setContent(""); // フォームをリセット
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  if (error instanceof Error) return <p>エラー: {error.message}</p>;
 
   return (
     <>
@@ -73,15 +75,19 @@ export const Home = () => {
           ></textarea>
         </div>
         <div className="form-control">
-          <button type="submit">投稿</button>
+          <button type="submit" disabled={mutation.isLoading}>
+            {mutation.isLoading ? "投稿中..." : "投稿"}
+          </button>
         </div>
       </form>
       <div className="timeline">
         <div className="timeline__inner">
           <h3>投稿一覧</h3>
           <div className="timeline__list">
-            {posts.length === 0 ? (
-              <p>投稿がりません</p>
+            {isLoading ? (
+              <p>読み込み中...</p>
+            ) : posts.length === 0 ? (
+              <p>投稿がありません</p>
             ) : (
               posts.map((post, index) => (
                 <TimelineItem
